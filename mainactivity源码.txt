@@ -1,0 +1,74 @@
+package com.example.administrator.denglu;
+
+import android.content.DialogInterface;
+import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.Button;
+import android.widget.ImageButton;
+import android.widget.Toast;
+
+public class MainActivity extends AppCompatActivity implements OnClickListener {
+
+    //声明对象
+    private Button count;
+    private  Button pass;
+    private ImageButton img;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+
+    //初始化对象
+        count=findViewById(R.id.button);
+        pass=findViewById(R.id.button2);
+        img=findViewById(R.id.imageButton);
+
+        //通过接口实现监听
+        img.setOnClickListener(this);
+
+        // 用过匿名内部类实现监听
+        pass.setOnClickListener( new pass(){
+
+            @Override
+            public void onClick(View view) {
+                super.onClick(view);
+                Toast.makeText(MainActivity.this, "您点击了注册按钮", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        //通过外部类实现监听
+        count.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                Toast.makeText(MainActivity.this, "您点击了登录按钮", Toast.LENGTH_SHORT).show();
+
+            }
+        });
+
+
+
+    }
+
+    @Override
+    public void onClick(View view) {
+
+        Log.i("t","第三种方式执行了");
+        Toast.makeText(this, "您点击了图片", Toast.LENGTH_SHORT).show();
+
+    }
+}
+
+     //外部类
+class pass implements OnClickListener{
+    @Override
+    public void onClick(View view) {
+
+        Log.i("tag","父类的onclick执行了");
+
+    }
+}
